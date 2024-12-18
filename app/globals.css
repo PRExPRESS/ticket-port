@@ -7,9 +7,10 @@
   padding: 0;
   box-sizing: border-box;
 }
-html,body{
+html, body {
   margin: 0;
-  width: 100%;
+  padding: 0;
+  
 }
 
 .swiper-button-next, .swiper-button-prev{

@@ -4,12 +4,11 @@ import React from 'react'
 
 import { XMarkIcon } from '@heroicons/react/16/solid';
 
-
+import SidebarNav from '../Sidebar-nav';
 import { HomeIcon } from '@heroicons/react/24/outline';
 import { UsersIcon } from '@heroicons/react/24/outline';
 import { BuildingStorefrontIcon } from '@heroicons/react/24/outline';
 import { AnimatePresence, motion } from 'motion/react';
-import SidebarNav from '../Sidebar-nav';
 
 
 interface MobileNavProps {

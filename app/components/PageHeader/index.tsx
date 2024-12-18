@@ -9,7 +9,7 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ title, subtitle }) => {
     const {theme} = useTheme();
   return (
-    <div className={`text-center mb-8 px-[10%] py-[75px] 
+    <div className={`text-center mb-8 p-6 md:px-[10%] md:py-[75px] 
       ${theme === 'dark' ? "bg-[url('/imgs/dark-banner.jpg')]" : "bg-[url('/imgs/banner.jpg')]"} 
       bg-cover bg-center bg-no-repeat`}>
       <h1 className="text-3xl font-bold text-primary dark:text-text-dark font-playfair">{title}</h1>

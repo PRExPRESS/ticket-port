@@ -3,11 +3,12 @@ import Image from 'next/image'
 import React from 'react'
 import Button from '../CustomBotton'
 import { AnimatePresence, motion } from 'framer-motion'
+import Link from 'next/link'
 
 
 const ItemCard = () => {
   return (
-    <div className='flex flex-col w-[296px] h-[383px] items-center bg-white border dark:border-gray-200/10 rounded-lg hover:shadow-xl'>
+    <div className='col-span-1 flex flex-col items-center bg-white border dark:border-gray-200/10 rounded-lg hover:shadow-xl '>
       <div className="block w-full  bg-gray-300 rounded-lg overflow-hidden">
         <AnimatePresence>
           <motion.div
@@ -43,11 +44,13 @@ const ItemCard = () => {
         </div>
       </div>
 
+    <Link href={ `/view-event/${1}`} className='w-10/12'>
       <Button 
       label='Buy Ticket' 
-      className='bg-accent hover:bg-hoverEffects-gold text-primary p-4 w-10/12' 
+      className='bg-accent hover:bg-hoverEffects-gold text-primary p-4 w-full  mb-4' 
       onClick={() => {}}
       />
+    </Link>
     </div>
   )
 }

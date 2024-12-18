@@ -21,7 +21,7 @@ const CartSection: React.FC<CartSectionProps> = ({
   total,
 }) => {
   return (
-    <div className="bg-gray-100 dark:bg-gray-800 p-6 rounded-lg">
+    <div className="col-span-1 ">
       <h2 className="text-2xl font-bold text-text-light dark:text-text-dark mb-4">Your Cart</h2>
       {cart.length === 0 ? (
         <p className="text-text-muted dark:text-gray-400">No tickets selected yet.</p>

@@ -36,52 +36,21 @@ const FeatureEvents = () => {
     },
   ]
   return (
-    <div className='flex flex-col justify-between  w-full h-full p-[67px] my-[50px] '>
-      <span className='text-5xl font-bold text-text-light dark:text-text-dark font-playfair '>Featured Events</span>
+    <div className='flex flex-col justify-between  w-full h-full p-4 my-[50px] '>
+      <span className='text-3xl md:text-5xl font-bold text-primary dark:text-text-dark font-Roboto '>Featured Events</span>
 
       <div className="flex flex-col justify-center items-center w-full h-full ">
 
-        <div className="w-full h-full flex-col justify-center items-center mt-10">
-          <Swiper
-            slidesPerView={1}
-            spaceBetween={10}
-            navigation
-            pagination={{ clickable: true }}
-            breakpoints={{
-              640: {
-                slidesPerView: 1,
-              },
-              768: {
-                slidesPerView: 3,
-              },
-              1024: {
-                slidesPerView: 3,
-              },
-            }}
-            modules={[Navigation, Pagination]}
-            className="mySwiper"
-          >
-            {
-              events.map((item, index) => {
-                if (index > 5) return
-                return (
-                  <SwiperSlide key={index}>
-                    <div>
-                      <ItemCard />
-                    </div>
-                  </SwiperSlide>
-                )
-              })
-            }
-
-          </Swiper>
-        </div>
+      <div className="grid grid-cols-1  md:grid-cols-4 gap-8 mt-10">
+        {events.map((event, index) => (
+          <ItemCard key={index}  />
+        ))}
+      </div>
 
       <Button label='View All' onClick={() => { }}
         className='bg-primary hover:bg-hoverEffects-gold text-white p-4 mt-8 h-[50px] w-[200px]'
       />
       </div>
-
 
 
 

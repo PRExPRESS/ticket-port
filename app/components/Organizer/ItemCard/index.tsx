@@ -1,55 +1,92 @@
-import { CalendarDateRangeIcon, CalendarIcon, ClockIcon, MapPinIcon } from '@heroicons/react/24/outline'
-import Image from 'next/image'
-import React from 'react'
-import Button from '../../CustomBotton'
-import { AnimatePresence, motion } from 'framer-motion'
+'use client';
+import React from 'react';
+import { MapPinIcon, CalendarIcon, TicketIcon, PencilIcon, TrashIcon, UserGroupIcon } from '@heroicons/react/24/outline';
 
+type EventCardProps = {
+  name: string;
+  location: string;
+  date: string;
+  totalTickets: number ;
+  purchases: number;
+  status: string;
+  onEdit: () => void;
+  onDelete: () => void;
+};
 
-const ItemCard = () => {
+const EventCard: React.FC<EventCardProps> = ({
+  name,
+  location,
+  date,
+  totalTickets,
+  purchases,
+  status,
+  onEdit,
+  onDelete,
+}) => {
   return (
-    <div className='flex flex-col w-[296px] h-[383px] items-center bg-white border dark:border-gray-200/10 rounded-lg hover:shadow-xl'>
-      <div className="block w-full  bg-gray-300 rounded-lg overflow-hidden">
-        <AnimatePresence>
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.5 }}
-            whileHover={{ scale: 1.05 }}
+    <div className="w-full bg-white dark:bg-gray-800 border dark:border-gray-700 rounded-lg shadow-lg hover:shadow-2xl p-4 flex flex-col gap-4 transition duration-300">
+      {/* Event Header */}
+      <div className="flex justify-between items-start">
+        <div>
+          <h3 className="text-xl font-bold text-gray-800 dark:text-gray-100">{name}</h3>
+          <p className="text-sm text-gray-500 dark:text-gray-400 flex items-center gap-1">
+            <MapPinIcon className="h-4 w-4 text-blue-500" />
+            {location}
+          </p>
+        </div>
+
+        {/* Edit & Delete Icons */}
+        <div className="flex gap-2">
+          <button
+            onClick={onEdit}
+            className="text-blue-500 hover:text-blue-600 transition duration-300"
+            title="Edit Event"
           >
-            <Image src="/imgs/sample-event.jpg" alt="Product Image" width={296} height={180} className='rounded-t-lg' />
-            
-          </motion.div>
-        </AnimatePresence>
-      </div>
-      {/* info */}
-      <div className="flex flex-col px-4 py-2 items-center gap-5">
-        <span className='text-2xl font-bold text-text-light dark:text-text-dark font-playfair'>Smbathra</span>
-        <div className="flex flex-col gap-1">
-          
-          <div className='flex flex-row items-center text-sm text-text-muted font-medium font-roboto gap-2'>
-            <CalendarIcon className='w-4 h-4 inline-block' /> 
-            21st November 2024
-          </div>
-          <div className='flex flex-row items-center text-sm text-text-muted font-medium font-roboto gap-2'>
-            <ClockIcon className='w-4 h-4 inline-block' /> 
-            04:00 PM 
-          </div>
-          <div className='flex flex-row items-center text-sm text-text-muted font-medium font-roboto gap-2'>
-            <MapPinIcon className='w-4 h-4 inline-block' /> 
-            Horizon Campus
-          </div>
-          
+            <PencilIcon className="h-5 w-5" />
+          </button>
+          <button
+            onClick={onDelete}
+            className="text-red-500 hover:text-red-600 transition duration-300"
+            title="Delete Event"
+          >
+            <TrashIcon className="h-5 w-5" />
+          </button>
         </div>
       </div>
 
-      <Button 
-      label='View Event' 
-      className='bg-accent hover:bg-hoverEffects-gold text-primary p-4 w-10/12' 
-      onClick={() => {}}
-      />
+      {/* Event Info */}
+      <div className="grid grid-cols-2 gap-4">
+        <div className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300">
+          <CalendarIcon className="h-5 w-5 text-green-500" />
+          <span>{date}</span>
+        </div>
+        <div className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300">
+          <TicketIcon className="h-5 w-5 text-yellow-500" />
+          <span>
+            {totalTickets}
+            {/* {totalTickets === 'Unlimited' ? 'Unlimited Tickets' : `${totalTickets} Tickets`} */}
+          </span>
+        </div>
+        <div className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300">
+          <UserGroupIcon className="h-5 w-5 text-purple-500" />
+          <span>{purchases} Purchases</span>
+        </div>
+        <div className="flex items-center gap-2 text-sm font-semibold">
+          <span
+            className={`${
+              status === 'Active'
+                ? 'text-green-500'
+                : status === 'Ended'
+                ? 'text-red-500'
+                : 'text-yellow-500'
+            }`}
+          >
+            {status}
+          </span>
+        </div>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default ItemCard
+export default EventCard;

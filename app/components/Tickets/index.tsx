@@ -1,5 +1,6 @@
 import React from 'react';
 import Button from '../CustomBotton';
+import Link from 'next/link';
 
 
 interface Ticket {
@@ -20,9 +21,9 @@ interface TicketSelectionProps {
 
 const TicketSelection: React.FC<TicketSelectionProps> = ({ addToCart }) => {
     return (
-        <div className="bg-gray-100 dark:bg-gray-800 p-6 rounded-lg mb-8">
+        <div className="col-span-1 bg-gray-100 dark:bg-gray-800 p-6 rounded-lg ">
             <h2 className="text-2xl font-bold text-text-light dark:text-text-dark mb-4">Select Tickets</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-6">
                 {tickets.map((ticket) => (
                     <div
                         key={ticket.id}
@@ -32,9 +33,10 @@ const TicketSelection: React.FC<TicketSelectionProps> = ({ addToCart }) => {
                             {ticket.name}
                         </h3>
                         <p className="text-text-muted dark:text-gray-400 mt-2">Price: ${ticket.price}</p>
+                        
                         <Button
                             label="Select"
-                            className="mt-4 bg-primary dark:bg-accent hover:bg-hoverEffects-gold text-white py-2 px-4 "
+                            className=" bg-primary mt-4 dark:bg-accent hover:bg-hoverEffects-gold text-white py-2 px-4 "
                             onClick={() => addToCart(ticket)}
                         />
                     </div>

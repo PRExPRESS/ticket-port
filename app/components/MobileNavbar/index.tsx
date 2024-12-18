@@ -1,85 +1,77 @@
 
 import React from 'react'
 
-
+import Logo from '../assets/IMG/logo.png';
 import { XMarkIcon } from '@heroicons/react/16/solid';
-
-
-import { HomeIcon } from '@heroicons/react/24/outline';
-import { UsersIcon } from '@heroicons/react/24/outline';
-import { BuildingStorefrontIcon } from '@heroicons/react/24/outline';
-import { AnimatePresence, motion } from 'motion/react';
-import SidebarNav from '../Sidebar-nav';
+import Link from 'next/link';
+import Image from 'next/image';
+import { AnimatePresence } from 'framer-motion';
 
 
 interface MobileNavProps {
-    username: boolean;
+    username: string;
     logout: () => void;
     close: () => void;
 }
 const MobileNav: React.FC<MobileNavProps> = ({ username, logout, close }) => {
-    const sidebarItems = [
-        {
-            title: "Dashboard",
-            icon: <HomeIcon className='w-4 h-4 text-text-light dark:text-text-dark'/>,
-            links: [
-                {
-                    title: "Home",
-                    href: "/admin",
-                }
-            ],
-        },
-        {
-            title: "Users",
-            icon: <UsersIcon className='w-4 h-4 text-text-light dark:text-text-dark'/>,
-            links: [
-                {
-                    title: "Users",
-                    href: "/admin/users",
-                },
-                {
-                    title: "Create User",
-                    href: "/admin/create-user",
-                }
-                
-            ]
-        },
-        {
-            title: "Companies",
-            icon: <BuildingStorefrontIcon className='w-4 h-4 text-text-light dark:text-text-dark'/>,
-            links: [
-                {
-                    title: "Companies",
-                    href: "/admin/companies",
-                },
-                {
-                    title: "Create Company",
-                    href: "/admin/create-company",
-                }
-                
-            ]
-        }
-    ]
-    return (
-        <div className='w-full h-full inset-0 bg-black/50 absolute top-0 left-0 z-50'>
-            <AnimatePresence>
-                <motion.div 
-                initial={{ x: '-100%' }} 
-                animate={{ x: '0%' }} 
-                exit={{ x: '-100%' }} 
-                transition={{ duration: 0.3, ease: 'easeOut' }} 
-                 >
 
-            <div className='w-10/12 h-full min-h-screen bg-background-light dark:bg-background-dark relative p-4'>
-                <span className='absolute top-0 right-0'><XMarkIcon className="w-8 h-8 text-accent cursor-pointer hover:text-red-500" onClick={close} /></span>
-                <span className='text-2xl font-bold text-text-dark p-4  border-b border-gray-200/10 font-mono'> U M S</span>
-                <div className="flex flex-col ">
-                    <SidebarNav sidebarItems={sidebarItems} setIsOpen={close}   />
+    return (
+        <div className='w-full h-full inset-0 bg-black/50 fixed top-0 left-0 z-10'>
+            <AnimatePresence>
+                
+            </AnimatePresence>
+            <div className='w-8/12 h-full min-h-screen bg-white relative'>
+                <span className='absolute top-0 right-0'><XMarkIcon className="w-8 h-8 text-primary cursor-pointer hover:stroke-secondary" onClick={close} /></span>
+                <div className="w-full h-[auto] ">
+                    <Link href={'/'} className="flex flex-row items-center p-6 md:w-2/12">
+                        <div className=''>
+                            <Image
+                                src={'/imgs/logo/logo.png'}
+                                width={30}
+                                height={30}
+                                alt='logo'
+
+                                className='w-full h-full object-contain' />
+                        </div>
+                        <span className='text-2xl font-fira font-bold text-primary dark:text-text-dark'>Ticket Port</span>
+                    </Link>
+                    <div className="flex flex-col items-start justify-between w-full h-full gap-6 p-6">
+                        {username && (
+                            <span className='text-primary text-xl font-bold '>Hello, {username.split(' ')[0]}</span>
+
+                        )}
+                        {!username && (
+                            <>
+                                <span className='text-primary text-xl font-bold '>Hello, Guest</span>
+                                <Link href={'/login'} className='hover:text-secondary mt-4' onClick={close}>Login</Link>
+                            </>
+                        )}
+
+
+                        <Link href={'/'} className='text-[16px] font-bold text-text-light dark:text-text-dark hover:text-hoverEffects-gold dark:hover:text-hoverEffects-gold font-roboto' onClick={close}>Home</Link>
+
+                        <Link href={'/mytickets'} className='text-[16px] font-bold text-text-light dark:text-text-dark hover:text-hoverEffects-gold dark:hover:text-hoverEffects-gold font-roboto' onClick={close}>My Tickets</Link>
+
+                        <Link href={'/explore-events'} className='text-[16px] font-bold text-text-light dark:text-text-dark hover:text-hoverEffects-gold dark:hover:text-hoverEffects-gold font-roboto' onClick={close}>Explore Events</Link>
+
+                        
+                    </div>
+                    <div className="flex flex-col items-start justify-between w-full h-full gap-6 p-6">
+                        
+
+
+                        <Link href={'/'} className='text-[16px] font-bold text-text-light dark:text-text-dark hover:text-hoverEffects-gold dark:hover:text-hoverEffects-gold font-roboto' onClick={close}>Concerts</Link>
+
+                        <Link href={'/mytickets'} className='text-[16px] font-bold text-text-light dark:text-text-dark hover:text-hoverEffects-gold dark:hover:text-hoverEffects-gold font-roboto' onClick={close}>Theaters</Link>
+
+                        <Link href={'/explore-events'} className='text-[16px] font-bold text-text-light dark:text-text-dark hover:text-hoverEffects-gold dark:hover:text-hoverEffects-gold font-roboto' onClick={close}>EDMs</Link>
+
+                        {username && (
+                            <Link href={'#'} className='hover:text-secondary mt-4 ' onClick={() => { logout(); close(); }}>Logout</Link>
+                        )}
+                    </div>
                 </div>
             </div>
-                </motion.div>
-            
-            </AnimatePresence>
         </div>
     )
 }

@@ -3,6 +3,7 @@ import CartSection from '@/app/components/Cart';
 import Button from '@/app/components/CustomBotton';
 import EventDetails from '@/app/components/EventDetails';
 import TicketSelection from '@/app/components/Tickets';
+import Link from 'next/link';
 import React, { useState } from 'react';
 
 
@@ -15,7 +16,7 @@ interface CartItem {
 
 const PurchasePage: React.FC = () => {
   const [cart, setCart] = useState<CartItem[]>([]);
-  
+
   const addToCart = (ticket: { id: number; name: string; price: number }) => {
     setCart((prev) => {
       const existing = prev.find((item) => item.id === ticket.id);
@@ -28,7 +29,7 @@ const PurchasePage: React.FC = () => {
       return [...prev, { ...ticket, quantity: 1 }];
     });
   };
-  
+
   const removeFromCart = (id: number) => {
     setCart(cart.filter((item) => item.id !== id));
   };
@@ -44,29 +45,34 @@ const PurchasePage: React.FC = () => {
   const total = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
   return (
-    <div className="container mx-auto px-[10%] py-8 bg-background-light dark:bg-background-dark">
+    <div className="container mx-auto  py-8 bg-background-light dark:bg-background-dark">
       {/* Event Details */}
       <EventDetails />
 
-      {/* Ticket Selection */}
-      <TicketSelection addToCart={addToCart} />
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
+        {/* Ticket Selection */}
+        <TicketSelection addToCart={addToCart} />
+        {/* Cart Section */}
+        <div className="col-span-1 bg-gray-100 dark:bg-gray-800 p-6 rounded-lg">
+          <CartSection
+            cart={cart}
+            removeFromCart={removeFromCart}
+            updateQuantity={updateQuantity}
+            total={total}
+          />
 
-      {/* Cart Section */}
-      <CartSection
-        cart={cart}
-        removeFromCart={removeFromCart}
-        updateQuantity={updateQuantity}
-        total={total}
-      />
+          {/* CTA */}
+          <div className="flex justify-end mt-8">
+            <Link href={`/payment/${1}?total=${total}`} className={`bg-primary dark:bg-accent hover:bg-hoverEffects-gold text-white py-3 px-6`}>
+            Proceed to Payment
+            </Link>
+            
+          </div>
+        </div>
 
-      {/* CTA */}
-      <div className="flex justify-end mt-8">
-        <Button
-          label="Proceed to Payment"
-          className="bg-primary dark:bg-accent hover:bg-hoverEffects-gold text-white py-3 px-6 "
-          onClick={() => alert('Redirecting to payment page...')}
-        />
       </div>
+
+
     </div>
   );
 };

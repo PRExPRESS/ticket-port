@@ -57,11 +57,11 @@ const PaymentPage: React.FC = () => {
     const isCheckoutDisabled = paymentMethod === 'bank' && !paymentSlip;
 
     return (
-        <div className="container mx-auto  pb-8 bg-background-light dark:bg-background-dark">
+        <div className="container   pb-8 bg-background-light dark:bg-background-dark">
             <Header title="Checkout" subtitle="Make your payment" />
 
             {/* Two Column Layout */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-[10%]">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-4 w-full">
                 {/* Left Column: Payment Methods */}
                 <div className="bg-gray-100 dark:bg-gray-800 p-6 rounded-lg col-span-2">
                     <h2 className="text-2xl font-bold mb-4 text-text-light dark:text-text-dark">Select Payment Method</h2>
@@ -153,7 +153,7 @@ const PaymentPage: React.FC = () => {
                 </div>
 
                 {/* Right Column: Event Details & Summary */}
-                <div className="bg-gray-100 dark:bg-gray-800 p-6 rounded-lg ">
+                <div className="bg-gray-100 dark:bg-gray-800 p-6 rounded-lg w-full col-span-2">
                     <h2 className="text-2xl font-bold mb-4 text-text-light dark:text-text-dark">Event Details</h2>
                     <p className="text-text-light dark:text-text-dark">Event: Tutorial on Canvas Painting</p>
                     <p className="text-text-light dark:text-text-dark">Date: 21st November 2024</p>

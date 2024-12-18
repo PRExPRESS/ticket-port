@@ -7,7 +7,7 @@ interface Props {
 }
 const NavItem = ({text, href}: Props) => {
   return (
-    <Link href={href} className="text-[16px] font-bold text-text-light dark:text-text-dark hover:text-hoverEffects-gold dark:hover:text-hoverEffects-gold">{text}</Link>
+    <Link href={href} className="text-[16px] font-bold text-text-light dark:text-text-dark hover:text-hoverEffects-gold dark:hover:text-hoverEffects-gold font-roboto">{text}</Link>
   )
 }
 

@@ -5,10 +5,16 @@ import { useTheme } from 'next-themes';
 import Link from 'next/link';
 import React, { useState } from 'react'
 import MobileNavbar from '../MobileNavbar';
+import NotificationPopup from '../../Notification';
 
-const Topbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [isOpenSidebar, setIsOpenSidebar] = useState(false);
+interface Props {
+  isOpen: boolean;
+  setIsOpen: (isOpen: boolean) => void;
+  setIsOpenMobile: (isOpen: boolean) => void
+}
+const Topbar = ({ isOpen, setIsOpen, setIsOpenMobile }: Props) => {
+  const [isOpenMob, setIsOpenMob] = useState(false);
+  const [isOpenNotif, setIsOpenNotif] = useState(false);
   const { theme, setTheme } = useTheme();
   const username = 'John Doe'
   const letter = username.charAt(0);
@@ -20,12 +26,12 @@ const Topbar = () => {
 
     <div className='w-full  dark:bg-background-dark  border-b dark:border-gray-200/10 flex flex-row items-center justify-between  p-4 shadow'>
       <div className='md:hidden block'>
-        <Bars3Icon className='w-6 h-6' onClick={() => setIsOpen(!isOpen)} />
+        <Bars3Icon className='w-6 h-6' onClick={() => setIsOpenMob(!isOpenMob)} />
       </div>
       <div className='hidden md:block'>
-        <Bars3Icon className='w-6 h-6' onClick={() => setIsOpenSidebar(!isOpenSidebar)} />
+        <Bars3Icon className='w-6 h-6' onClick={() => { setIsOpen(!isOpen); }} />
       </div>
-      <div className="flex flex-row items-center justify-evenly w-4/12 md:w-3/12">
+      <div className="flex flex-row items-center justify-evenly w-6/12 md:w-3/12">
         <span onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
           {
             theme === "dark" ? (
@@ -35,29 +41,34 @@ const Topbar = () => {
             )
           }
         </span>
-        <Link href="/admin/profile" className="w-8 h-8 rounded-full flex flex-row items-center justify-center bg-accent border cursor-pointer hover:bg-green-700">
+        <Link href={`/organizer/settings/profile/view-profile/${username}`} className="w-8 h-8 rounded-full flex flex-row items-center justify-center bg-accent border cursor-pointer hover:bg-green-700">
           <span className='dark:text-text-dark text-text-light'>{letter}</span>
         </Link>
-        <Link href="/organizer/notification" className="relative text-text-light dark:text-text-dark font-bold text-sm">
-      {/* Bell Icon */}
-      <BellIcon className="w-6 h-6 cursor-pointer hover:text-accent dark:hover:text-accent" />
+        <div className="relative text-text-light dark:text-text-dark font-bold text-sm " onClick={() => setIsOpenNotif(!isOpenNotif)}>
+          {/* Bell Icon */}
+          <BellIcon className="w-6 h-6 cursor-pointer hover:text-accent dark:hover:text-accent" />
 
-      {/* Notification Count Badge */}
-      {count > 0 && (
-        <span className="absolute -top-1 -right-2 bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
-          {count > 99 ? '99+' : count} {/* Limit display to 99+ */}
-        </span>
-      )}
-    </Link>
+          {/* Notification Count Badge */}
+          {count > 0 && (
+            <span className="absolute -top-1 -right-2 bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+              {count > 99 ? '99+' : count} {/* Limit display to 99+ */}
+            </span>
+          )}
+        </div>
         <span onClick={logout}>
           <PowerIcon className="w-6 h-6 text-text-light dark:text-text-dark cursor-pointer hover:text-accent dark:hover:text-accent" />
         </span>
       </div>
       {
-        isOpen && (
+        isOpenMob && (
           <div className='flex flex-col justify-center items-center w-full h-full bg-white'>
             <MobileNavbar username={isAuthenticated} logout={logout} close={(): void => setIsOpen(false)} />
           </div>
+        )
+      }
+      {
+        isOpenNotif && (
+          <NotificationPopup onClose={(): void => setIsOpenNotif(false)} />
         )
       }
     </div>

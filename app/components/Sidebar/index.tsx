@@ -23,26 +23,38 @@ const Sidebar = () => {
                     title: "Users",
                     href: "/admin/users",
                 },
-                {
-                    title: "Create User",
-                    href: "/admin/create-user",
-                }
+                
                 
             ]
         },
         {
-            title: "Companies",
+            title: "Events",
             icon: <BuildingStorefrontIcon className='w-4 h-4 text-white'/>,
             links: [
                 {
-                    title: "Companies",
-                    href: "/admin/companies",
+                    title: "Events",
+                    href: "/admin/events",
                 },
+            ]
+        },
+        {
+            title: "Feedbacks",
+            icon: <BuildingStorefrontIcon className='w-4 h-4 text-white'/>,
+            links: [
                 {
-                    title: "Create Company",
-                    href: "/admin/create-company",
-                }
-                
+                    title: "Feedbacks",
+                    href: "/admin/feedbacks",
+                },
+            ]
+        },
+        {
+            title: "Logs",
+            icon: <BuildingStorefrontIcon className='w-4 h-4 text-white'/>,
+            links: [
+                {
+                    title: "Logs",
+                    href: "/admin/logs",
+                },
             ]
         }
     ]

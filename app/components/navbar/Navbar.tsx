@@ -8,16 +8,20 @@ const Navbar = () => {
             href:"/"
         },
         {
-            name:"About",
-            href:"/about"
+            name:"EDM",
+            href:"/explore-events?category=edm"
         },
         {
-            name:"Contact",
-            href:"/contact"
-        }
+            name:"Concerts",
+            href:"/explore-events?category=concerts"
+        },
+        {
+          name:"Theaters",
+          href:"/explore-events?category=theaters"
+      }
     ]
   return (
-    <div className='flex flex-row justify-between items-center w-2/12'>
+    <div className='hidden md:flex flex-row justify-between items-center w-2/12'>
       {
           nav.map((item)=><NavItem key={item.name} text={item.name} href={item.href}/>)
       }

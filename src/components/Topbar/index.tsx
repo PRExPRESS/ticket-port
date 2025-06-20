@@ -26,7 +26,6 @@ const Topbar = () => {
   //const isAuthenticated = true;
   
 
-
   return (
     <div className="w-full  dark:bg-background  border-b dark:border-gray-200/10 flex flex-row items-center justify-between  p-4 shadow">
       <Link href={"/"} className="flex flex-row items-center md:w-2/12">

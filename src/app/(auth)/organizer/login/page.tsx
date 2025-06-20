@@ -1,18 +1,15 @@
 'use client'
 import React, { useState } from 'react'
-
 import Link from 'next/link'
-
-
 import toastr from 'toastr';
 import { redirect } from 'next/navigation';
-
-import Input from '../../../components/FormInput';
-import Button from '../../../components/CustomBotton';
-import { userValidation } from '@/app/validations/user-validation';
 import { GoogleLogin } from '@react-oauth/google';
 import { userLogin } from '@/services/user.service';
-import { useAuth } from '@/app/context/AuthContext';
+import Button from '@/components/CustomBotton';
+import Input from '@/components/FormInput';
+import Image from 'next/image';
+import { useAuth } from '@/context/AuthContext';
+
 
 //import { adminLogin } from '../services/auth.service'
 type errorType = {
@@ -22,7 +19,7 @@ type errorType = {
   confirmPassword?: string,
   phone?: string
 };
-const page = () => {
+const Page = () => {
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -104,7 +101,7 @@ const page = () => {
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
       <div className='flex justify-center items-center w-full'>
         <div className="block w-[50px] h-[50px]">
-          <img src="/imgs/logo/logo.png" alt="" />
+          <Image width={50} height={50} src="/imgs/logo/logo.png" alt="" />
         </div>
         <span className='text-5xl font-bold text-text-light font-playfair'>TicketPort</span>
       </div>
@@ -120,7 +117,7 @@ const page = () => {
               name="email"
               onChange={(e) => { setFormData({ ...formData, email: e.target.value }) }}
               value={formData.email}
-              error={errors.email}
+              error={errors.email ? [errors.email] : undefined}
               className=''
             />
           </div>
@@ -132,7 +129,7 @@ const page = () => {
               name="password"
               onChange={(e) => { setFormData({ ...formData, password: e.target.value }) }}
               value={formData.password}
-              error={errors.password}
+              error={errors.password ? [errors.password] : undefined}
             />
           </div>
           <Link href="/forgot-password" className='text-primary hover:text-hoverEffects-gold font-bold'>Forgot password?</Link>
@@ -142,7 +139,7 @@ const page = () => {
             className='w-full bg-primary text-white hover:bg-accent hover:text-white mt-4'
           />
         </form>
-        <div className='text-text-light mt-3' >Don't have an account?<Link href="/register" className='text-accent hover:text-primary '> Register</Link></div>
+        <div className='text-text-light mt-3' >Don&apos;t have an account?<Link href="/register" className='text-accent hover:text-primary '> Register</Link></div>
       </div>
       <div className="flex flex-col items-center justify-center mt-6 w-full">
         <div className="flex items-center justify-center w-3/12 my-4">
@@ -164,4 +161,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

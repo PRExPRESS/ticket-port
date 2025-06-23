@@ -90,6 +90,10 @@ const config = {
 			playfair: [
 				'var(--font-playfair)',
 				'serif'
+			],
+			ibmPlexMono: [
+				'var(--font-ibm-plex-mono)',
+				'monospace'
 			]
 		},
 		borderRadius: {

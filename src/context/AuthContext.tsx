@@ -9,9 +9,12 @@ interface AuthContextType {
   logout: () => void;
   isAuthenticated: boolean;
 }
-
-
-
+export interface User {
+  uid: string;
+  email: string;
+  username: string;
+  role: UserRole;
+}
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {

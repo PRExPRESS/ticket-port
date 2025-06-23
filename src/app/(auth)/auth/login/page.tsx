@@ -12,6 +12,9 @@ import { useAuth } from "@/context/AuthContext";
 import Input from "@/components/FormInput";
 import Button from "@/components/CustomBotton";
 
+import CookiesStore from "@/components/CookiesStore";
+import axios from "axios";
+
 //import { adminLogin } from '../services/auth.service'
 type errorType = {
   email?: string;
@@ -131,6 +134,21 @@ const Page = () => {
     console.log(user);
     const loggedUser = await userLogin(user);
     if ("status" in loggedUser && loggedUser.status === 201) {
+      const loggedUserData = {
+        username: loggedUser?.data?.username,
+        email: loggedUser?.data?.email,
+        uid: loggedUser?.data?.uid,
+        role: loggedUser?.data?.role,
+        accessToken: loggedUser?.data?.accessToken,
+      }
+      const res = await axios.post("/api/set-user", {
+        user: loggedUser?.data,
+      },{
+        withCredentials: true, 
+        headers: { "Content-Type": "application/json" },
+      });
+      console.log("Logged user ", loggedUserData);
+      console.log("Set user response", res.data);
       login((loggedUser?.data));
     }
     console.log("loggedUser", loggedUser);

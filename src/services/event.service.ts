@@ -5,7 +5,22 @@ import BASE_URL from "./baseUrl";
 const organizer = localStorage.getItem('organizer');
 const token = JSON.parse(organizer || '{}').token;
 
-
+/// create event
+export const createEvent = async (data: any) => {
+    
+    try {
+        const response = await axios.post(`${BASE_URL}/event`, data, {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'multipart/form-data'
+            }
+        });
+        return response.data;
+    } catch (error: any) {
+        console.log(error);
+        return { error: error.response?.data || 'An unknown error occurred' }
+    }
+};
 
 export const getAllEvents = async () => {
     
